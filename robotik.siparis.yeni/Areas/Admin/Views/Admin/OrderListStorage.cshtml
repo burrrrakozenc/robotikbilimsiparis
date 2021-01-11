@@ -1,0 +1,66 @@
+﻿@using Entity2
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "OrderListStorage";
+    User currentUser = Session["currentUser"] as User;
+    List<Order> orders = Query.OrderList();
+    List<User> users = Query.UserList();
+    List<Atelier> ateliers = Query.AtelierList();
+    List<BasketProduct> basketProducts = Query.BasketProductList();
+    List<Product> products = Query.ProductList();
+}
+
+<h3>Awaiting Submit for Storage</h3>
+
+<div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded">
+    <table class="kt-datatable__table" style="display: block; min-height: 500px;">
+        <thead class="kt-datatable__head">
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <th class="kt-datatable__cell"><span style="width: 100px;">Atelier (User)</span></th>
+                <th class="kt-datatable__cell"><span style="width: 120px;">Order Date</span></th>
+                <th class="kt-datatable__cell"><span style="width: 120px;">Order Details</span></th>
+                <th class="kt-datatable__cell"><span style="width: 75px;">Actions</span></th>
+            </tr>
+        </thead>
+        <tbody class="kt-datatable__body" style="">
+            @foreach (var o in orders.Where(a => a.AccountingStatus == true).Where(e => e.StoreStatus == false).ToList())
+            {
+                <tr class="kt-datatable__row" style="left: 0px;">
+                    <td class="kt-datatable__cell"><span style="width: 100px;">@ateliers.Find(a => a.ID == users.Where(u => u.ID == currentUser.ID).FirstOrDefault().AtelierID).Name (@users.Where(x => x.BasketID == o.BasketID).FirstOrDefault().FirstName)</span></td>
+                    <td class="kt-datatable__cell"><span style="width: 120px;">@o.CreatedOn</span></td>
+                    <td class="kt-datatable__cell"><button type="button" class="rounded btn btn-success" onclick="getProduct(@o.ID)"><span class="kt-nav__link-text">Siparisi Goruntule</span></button></td>
+                    <td class="kt-datatable__cell"><form class="storageStatusForm" id="form"><input type="hidden" name="OrderID" value="@o.ID" /><span style="width: 80px;"><button class="btn btn-success" type="submit">Submit</button></span></form></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="getProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Siparis Detayi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">Name</th>
+                            <th style="width: 100px;">Adet</th>
+                            <th style="width: 100px;">Tutar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

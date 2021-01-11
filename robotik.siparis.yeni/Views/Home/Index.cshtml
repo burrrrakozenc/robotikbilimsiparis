@@ -1,0 +1,14 @@
+﻿@using Entity2;
+@model User
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.AntiForgeryToken();
+<h2>Index</h2>
+
+<a href="/Product/Index/">Add Product</a>
+
+<a href="/user/index">Add User</a>
+
+<a href="/Home/Edit">Edit User</a>

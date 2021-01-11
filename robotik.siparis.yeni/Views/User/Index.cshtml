@@ -1,0 +1,10 @@
+﻿@using Entity2;
+@model User
+
+@{
+    ViewBag.Title = "Index";
+    User currentUser = Session["currentUser"] as User;
+    List<User> users = Query.UserList();
+}
+
+<h2>Index</h2>

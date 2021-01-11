@@ -1,0 +1,38 @@
+﻿@using Entity2;
+@model Atelier
+@{
+    ViewBag.Title = "Index";
+    User currentUser = Session["currentUser"] as User;
+    List<User> users = Query.UserList();
+    List<Atelier> ateliers = Query.AtelierList();
+}
+
+<h2>Index</h2>
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-4">
+        <span>Atelier Name</span>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        <a class="btn btn-success" onclick="meinfunction()">Add Atelier</a>
+    </div>
+</div>
+
+<script>
+    function meinfunction() {
+        var Name = $("#Name").val();
+        debugger
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Atelier/AtelierAdd',
+            data: JSON.stringify({ Name: Name }),
+            contentType: 'application/json',
+            success: function (data) {
+                alert("successfully inserted");
+            },
+
+            failure: function () {
+                alert("not successfull");
+            }
+        })
+    }
+</script>

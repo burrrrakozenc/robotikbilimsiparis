@@ -1,0 +1,198 @@
+﻿@using Entity2;
+@{
+    ViewBag.Title = "ProductAdd";
+    int counter = 0;
+    List<Product> products = Query.ProductList();
+    List<BasketProduct> basketProducts = Query.BasketProductList();
+}
+
+<h2>ProductAdd</h2>
+
+<div class="kt-content  kt-grid__item kt-grid__item--fluid" id="kt_content">
+
+    <!--begin::Portlet-->
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body kt-portlet__body--fit">
+
+            <!--begin: Datatable -->
+            <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded" id="kt_apps_user_list_datatable" style="">
+                <table class="kt-datatable__table" style="display: block; min-height: 500px;">
+                    <thead class="kt-datatable__head">
+                        <tr class="kt-datatable__row" style="left: 0px;">
+                            <th class="kt-datatable__cell kt-datatable__toggle-detail kt-datatable__cell--sort"><span></span></th>
+                            <th data-field="AgentName" class="kt-datatable__cell kt-datatable__cell--sort kt-datatable__cell--sorted" data-sort="desc"><span style="width: 200px;">User<i class="flaticon2-arrow-down"></i></span></th>
+                            <th data-field="Country" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 110px;">Country</span></th>
+                            <th data-field="ShipDate" class="kt-datatable__cell kt-datatable__cell--sort" style="display: none;"><span style="width: 110px;">Ship Date</span></th>
+                            <th data-field="ShipName" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 181px;">Company</span></th>
+                            <th data-field="Status" class="kt-datatable__cell kt-datatable__cell--sort" style="display: none;"><span style="width: 100px;">Status</span></th>
+                            <th data-field="Type" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 110px;">Type</span></th>
+                            <th data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 80px;">Actions</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="kt-datatable__body" style="">
+                        <tr data-row="0" class="kt-datatable__row" style="left: 0px;">
+                            <td class="kt-datatable__cell kt-datatable__toggle-detail"><a class="kt-datatable__toggle-detail" href=""><i class="fa fa-caret-right"></i></a></td>
+                            <td class="kt-datatable__cell--sorted kt-datatable__cell" data-field="AgentName">
+                                <span style="width: 200px;">
+                                    <div class="kt-user-card-v2">
+                                        <div class="kt-user-card-v2__pic">
+                                            <div class="kt-badge kt-badge--xl kt-badge--brand">H</div>
+                                        </div>
+                                        <div class="kt-user-card-v2__details">									<a class="kt-user-card-v2__name" href="#">Hayes Boule</a>									<span class="kt-user-card-v2__desc">Developer</span>								</div>
+                                    </div>
+                                </span>
+                            </td>
+                            <td data-field="Country" class="kt-datatable__cell"><span style="width: 110px;">Brazil BR</span></td>
+                            <td data-field="ShipDate" class="kt-datatable__cell" style="display: none;"><span style="width: 110px;">10/15/2017</span></td>
+                            <td data-field="ShipName" data-autohide-disabled="false" class="kt-datatable__cell">
+                                <span style="width: 181px;">
+                                    <div class="kt-user-card-v2">
+                                        <div class="kt-user-card-v2__pic">                                <img alt="photo" src="https://keenthemes.com/metronic/preview/assets/media/client-logos/logo1.png">                            </div>
+                                        <div class="kt-user-card-v2__details">                                <a class="kt-user-card-v2__name" href="#">Casper-Kerluke</a>                                <span class="kt-user-card-v2__email">Angular, React</span>                            </div>
+                                    </div>
+                                </span>
+                            </td>
+                            <td data-field="Status" class="kt-datatable__cell" style="display: none;"><span style="width: 100px;"><span class="btn btn-bold btn-sm btn-font-sm  btn-label-warning">Canceled</span></span></td>
+                            <td data-field="Type" data-autohide-disabled="false" class="kt-datatable__cell"><span style="width: 110px;"><span class="kt-badge kt-badge--danger kt-badge--dot"></span>&nbsp;<span class="kt-font-bold kt-font-danger">Online</span></span></td>
+                            <td data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell">
+                                <span style="overflow: visible; position: relative; width: 80px;">
+                                    <div class="dropdown">
+                                        <a data-toggle="dropdown" class="btn btn-sm btn-clean btn-icon btn-icon-md">									<i class="flaticon-more-1"></i>								</a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <ul class="kt-nav">
+                                                <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-expand"></i>												<span class="kt-nav__link-text">View</span>											</a>										</li>
+                                                <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-contract"></i>												<span class="kt-nav__link-text">Edit</span>											</a>										</li>
+                                                <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-trash"></i>												<span class="kt-nav__link-text">Delete</span>											</a>										</li>
+                                                <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-mail-1"></i>												<span class="kt-nav__link-text">Export</span>											</a>										</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="kt-datatable__pager kt-datatable--paging-loaded">
+                    <ul class="kt-datatable__pager-nav">
+                        <li><a title="First" class="kt-datatable__pager-link kt-datatable__pager-link--first kt-datatable__pager-link--disabled" data-page="1" disabled="disabled"><i class="flaticon2-fast-back"></i></a></li>
+                        <li><a title="Previous" class="kt-datatable__pager-link kt-datatable__pager-link--prev kt-datatable__pager-link--disabled" data-page="1" disabled="disabled"><i class="flaticon2-back"></i></a></li>
+                        <li style=""></li>
+                        <li style="display: none;"><input type="text" class="kt-pager-input form-control" title="Page number"></li>
+                        <li><a class="kt-datatable__pager-link kt-datatable__pager-link-number kt-datatable__pager-link--active" data-page="1" title="1">1</a></li>
+                        <li><a class="kt-datatable__pager-link kt-datatable__pager-link-number" data-page="2" title="2">2</a></li>
+                        <li><a class="kt-datatable__pager-link kt-datatable__pager-link-number" data-page="3" title="3">3</a></li>
+                        <li><a class="kt-datatable__pager-link kt-datatable__pager-link-number" data-page="4" title="4">4</a></li>
+                        <li><a class="kt-datatable__pager-link kt-datatable__pager-link-number" data-page="5" title="5">5</a></li>
+                        <li></li>
+                        <li><a title="Next" class="kt-datatable__pager-link kt-datatable__pager-link--next" data-page="2"><i class="flaticon2-next"></i></a></li>
+                        <li><a title="Last" class="kt-datatable__pager-link kt-datatable__pager-link--last" data-page="35"><i class="flaticon2-fast-next"></i></a></li>
+                    </ul>
+                    <div class="kt-datatable__pager-info">
+                        <div class="dropdown bootstrap-select kt-datatable__pager-size" style="width: 60px;">
+                            <select class="selectpicker kt-datatable__pager-size" title="Select page size" data-width="60px" data-selected="10" tabindex="-98">
+                                <option class="bs-title-option" value=""></option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <button type="button" class="btn dropdown-toggle btn-light" data-toggle="dropdown" role="button" title="Select page size">
+                                <div class="filter-option">
+                                    <div class="filter-option-inner">
+                                        <div class="filter-option-inner-inner">10</div>
+                                    </div>
+                                </div>
+                            </button>
+                            <div class="dropdown-menu " role="combobox">
+                                <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
+                                    <ul class="dropdown-menu inner show"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="kt-datatable__pager-detail">Showing 1 - 10 of 350</span>
+                    </div>
+                </div>
+            </div>
+            <!--end: Datatable -->
+        </div>
+    </div>
+
+    <!--end::Portlet-->
+    <!--begin::Modal-->
+    <div class="modal fade" id="kt_datatable_records_fetch_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Selected Records</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="kt-scroll ps" data-scroll="true" data-height="200" style="height: 200px; overflow: hidden;">
+                        <ul id="kt_apps_user_fetch_records_selected"></ul>
+                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-brand" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--end::Modal-->
+</div>
+
+@foreach (var i in basketProducts)
+{
+    for (counter = 0; counter < basketProducts.Count(); counter++)
+    {
+        <div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded" id="kt_apps_user_list_datatable" style="">
+            <table class="kt-datatable__table" style="display: block; min-height: 500px;">
+                <thead class="kt-datatable__head">
+                    <tr class="kt-datatable__row" style="left: 0px;">
+                        <th data-field="ProductName" class="kt-datatable__cell kt-datatable__cell--sort kt-datatable__cell--sorted" data-sort="desc"><span style="width: 200px;">Product Name<i class="flaticon2-arrow-down"></i></span></th>
+                        <th data-field="Quantity" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 110px;">Quantity</span></th>
+                        <th data-field="SubTotal" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 110px;">SubTotal</span></th>
+                        <th data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 80px;">Actions</span></th>
+                    </tr>
+                </thead>
+                <tbody class="kt-datatable__body" style="">
+                    <tr data-row="@counter" class="kt-datatable__row" style="left: 0px;">
+                        <td class="kt-datatable__cell--sorted kt-datatable__cell" data-field="ProductName">
+                            <span style="width: 200px;">
+                                <div class="kt-user-card-v2">
+                                    @*<div class="kt-user-card-v2__pic">
+                                            <div class="kt-badge kt-badge--xl kt-badge--brand">H</div>
+                                        </div>*@
+                                    <div class="kt-user-card-v2__details">									<a class="kt-user-card-v2__name" href="#">@products.Where(x => x.ID == i.ProductID).FirstOrDefault().ProductName</a></div>
+                                </div>
+                            </span>
+                        </td>
+                        <td data-field="Quantity" class="kt-datatable__cell"><span style="width: 110px;">@i.Quantity</span></td>
+                        <td data-field="SubTotal" class="kt-datatable__cell"><span style="width: 110px;">@i.SubTotal</span></td>
+                        @*<td data-field="SubTotal" data-autohide-disabled="false" class="kt-datatable__cell"><span style="width: 110px;"><span class="kt-badge kt-badge--danger kt-badge--dot"></span>&nbsp;<span class="kt-font-bold kt-font-danger">@i.SubTotal</span></span></td>*@
+                        <td data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell">
+                            <span style="overflow: visible; position: relative; width: 80px;">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown" class="btn btn-sm btn-clean btn-icon btn-icon-md">									<i class="flaticon-more-1"></i>								</a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <ul class="kt-nav">
+                                            <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-expand"></i>												<span class="kt-nav__link-text">View</span>											</a>										</li>
+                                            <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-contract"></i>												<span class="kt-nav__link-text">Edit</span>											</a>										</li>
+                                            <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-trash"></i>												<span class="kt-nav__link-text">Delete</span>											</a>										</li>
+                                            <li class="kt-nav__item">											<a class="kt-nav__link" href="#">												<i class="kt-nav__link-icon flaticon2-mail-1"></i>												<span class="kt-nav__link-text">Export</span>											</a>										</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        counter++;
+    }
+}

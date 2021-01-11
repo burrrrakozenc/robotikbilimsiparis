@@ -1,0 +1,89 @@
+﻿@using Entity2;
+@{
+    ViewBag.Title = "Index";
+    User currentUser = Session["currentUser"] as User;
+    List<BasketProduct> basketProducts = Query.BasketProductList().Where(a => a.OrderID == null).Where(x => x.BasketID == currentUser.BasketID).ToList();
+    List<Product> products = Query.ProductList();
+}
+
+
+
+
+<div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded" id="kt_apps_user_list_datatable" style="">
+    <table class="kt-datatable__table" style="display: block; min-height: 500px;">
+        <thead class="kt-datatable__head">
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <th data-field="ProductName" class="kt-datatable__cell kt-datatable__cell--sort kt-datatable__cell--sorted" data-sort="desc"><span style="width: 200px;">Product Name</span></th>
+                <th data-field="Quantity" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 110px;">Quantity</span></th>
+                <th data-field="SubTotal" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 110px;">SubTotal</span></th>
+                <th data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 80px;">Actions</span></th>
+            </tr>
+        </thead>
+        @foreach (var i in basketProducts)
+        {
+            <tbody class="kt-datatable__body" style="">
+                <tr data-row="0" class="kt-datatable__row" style="left: 0px;">
+                    <td class="kt-datatable__cell--sorted kt-datatable__cell" data-field="ProductName">
+                        <span style="width: 200px;">
+                            @products.Where(x => x.ID == i.ProductID).FirstOrDefault().ProductName
+                        </span>
+                    </td>
+                    <td data-field="Quantity" class="kt-datatable__cell"><span style="width: 110px;">@i.Quantity</span></td>
+                    <td data-field="SubTotal" class="kt-datatable__cell"><span style="width: 110px;">@i.SubTotal</span></td>
+                    <td data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell">
+                        <form class="basketDeleteForm">
+                            <div style="overflow: visible; position: relative; width: 80px;">
+                                <div class="dropdown">
+                                    <a data-toggle="dropdown" class="btn btn-sm btn-clean btn-icon btn-icon-md">									<i class="flaticon-more-1"></i>								</a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+
+                                        <ul class="kt-nav">
+                                            <input type="hidden" id="BasketID" name="BasketID" value="@currentUser.BasketID" />
+                                            <input type="hidden" id="ProductID" name="ProductID" value="@i.ProductID" />
+                                            <li class="kt-nav__item"><button class="kt-nav__link rounded btn"><i class="kt-nav__link-icon flaticon2-contract"></i><span class="kt-nav__link-text ">Edit</span></button></li>
+                                            <li class="kt-nav__item"><button type="submit" class="kt-nav__link rounded btn"><i class="kt-nav__link-icon flaticon2-trash"></i><span class="kt-nav__link-text">Sil</span></button></li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        }
+        <tfoot class="kt-datatable__foot">
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <td data-field="ProductName" class="kt-datatable__cell kt-datatable__cell"><span style="width: 250px;"></span></td>
+                <td data-field="Quantity" class="kt-datatable__cell kt-datatable__cell"><span style="width: 40px;"></span></td>
+                <td data-field="SubTotal" class="kt-datatable__cell kt-datatable__cell"><span style="width: 120px;">Total Price : @basketProducts.Where(x => x.BasketID == currentUser.BasketID).Sum(s => s.SubTotal)</span></td>
+                <td data-field="Actions" class="kt-datatable__cell kt-datatable__cell">
+                    <span style="width: 90px;">
+                        <input type="hidden" id="BasketID" value="@currentUser.BasketID" />
+                        <a class="kt-datatable__cell btn btn-success"><span onclick="myfunction()">Order</span></a>
+                    </span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script >
+    function myfunction() {
+        var BasketID = $("#BasketID").val();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Basket/OrderSend',
+            data: JSON.stringify({ BasketID: BasketID }),
+            contentType: 'application/json',
+            success: function (data) {
+                alert("successfully inserted");
+            },
+
+            failure: function () {
+                alert("not successfull");
+            }    
+        })
+    }
+</script>

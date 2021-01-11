@@ -1,0 +1,277 @@
+﻿@using Entity2
+
+@{
+    Layout = null;
+    List<User> users = Query.UserList();
+}
+
+
+@*@Html.AntiForgeryToken()*@
+<!DOCTYPE html>
+<html lang="en" class="wf-poppins-n5-active wf-poppins-n4-active wf-poppins-n3-active wf-poppins-n6-active wf-poppins-n7-active wf-roboto-n3-active wf-roboto-n4-active wf-roboto-n5-active wf-roboto-n6-active wf-roboto-n7-active wf-active">
+<!-- begin::Head -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--begin::Base Path (base relative path for assets of this page) -->
+    <!--<base href="../../../../">-->
+    <base href=".">
+    <!--end::Base Path -->
+
+    <title>Metronic | Login Page v3</title>
+    <meta name="description" content="Login page example">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--begin::Fonts -->
+    <script src="/Assets2/webfont.js.indir"></script>
+    <link rel="stylesheet" href="/Assets2/css" media="all">
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Poppins:300,400,500,600,700", "Roboto:300,400,500,600,700"]
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });</script>
+    <!--end::Fonts -->
+    <!--begin::Page Custom Styles(used by this page) -->
+    <script src="/Assets/js/Custom.js"></script>
+    <link href="/Assets2/login-3.css" rel="stylesheet" type="text/css">
+    <!--end::Page Custom Styles -->
+    <!--begin:: Global Mandatory Vendors -->
+    <link href="/Assets2/perfect-scrollbar.css" rel="stylesheet" type="text/css">
+    <!--end:: Global Mandatory Vendors -->
+    <!--begin:: Global Optional Vendors -->
+    <link href="/Assets2/tether.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/bootstrap-datepicker3.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/bootstrap-timepicker.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/daterangepicker.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/bootstrap-select.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/bootstrap-switch.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/select2.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/ion.rangeSlider.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/nouislider.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/owl.theme.default.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/dropzone.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/summernote.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/bootstrap-markdown.min.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/animate.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/toastr.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/morris.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/sweetalert2.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/socicon.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/line-awesome.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/flaticon.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/flaticon(1).css" rel="stylesheet" type="text/css">
+    <link href="file:///C:/Users/%C3%B6zay/Desktop/classic/assets/vendors/general/fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <!--end:: Global Optional Vendors -->
+    <!--begin::Global Theme Styles(used by all pages) -->
+    <link href="/Assets2/style.bundle.css" rel="stylesheet" type="text/css">
+    <!--end::Global Theme Styles -->
+    <!--begin::Layout Skins(used by all pages) -->
+    <link href="/Assets2/light.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/light(1).css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/dark.css" rel="stylesheet" type="text/css">
+    <link href="/Assets2/dark(1).css" rel="stylesheet" type="text/css">
+    <!--end::Layout Skins -->
+</head>
+<!-- end::Head -->
+<!-- begin::Body -->
+<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--fixed kt-subheader--enabled kt-subheader--solid kt-aside--enabled kt-aside--fixed">
+    <!-- begin:: Page -->
+    <div class="kt-grid kt-grid--ver kt-grid--root">
+        <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v3 kt-login--signin" id="kt_login">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background-image: url('/Assets/media/bg/bg-3.jpg')">
+                <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+                    <div class="kt-login__container">
+                        <div class="kt-login__logo">
+                            <a href="/Login/Index">
+                                <img src="/Assets2/logo-5.png">
+                            </a>
+                        </div>
+                        <div class="kt-login__signin">
+                            <div class="kt-login__head">
+                                <h3 class="kt-login__title">Sign In To Admin</h3>
+                            </div>
+                            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "kt-form" }))
+                            {
+                                <form class="kt-form" action="/Home/Index">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" placeholder="Email" name="Email" autocomplete="off">
+                                    </div>
+                                    <div class="input-group">
+                                        <input class="form-control" type="password" placeholder="Şifre" name="Password">
+                                    </div>
+                                    <div class="row kt-login__extra">
+                                        <div class="col">
+                                            <label class="kt-checkbox">
+                                                <input type="checkbox" name="remember"> Beni Hatırla
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="col kt-align-right">
+                                            <a href="#" id="kt_login_forgot" class="kt-login__link">Şifremi Unuttum</a>
+                                        </div>
+                                    </div>
+                                    <div class="kt-login__actions">
+                                        <button id="kt_login_signin_submit" class="btn btn-brand btn-elevate kt-login__btn-primary">Giriş</button>
+                                    </div>
+                                </form>
+                            }
+                        </div>
+                        <div class="kt-login__signup">
+                            <div class="kt-login__head">
+                                <h3 class="kt-login__title">Sign Up</h3>
+                                <div class="kt-login__desc">Enter your details to create your account:</div>
+                            </div>
+                            <form class="kt-form" action="">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Fullname" name="fullname">
+                                </div>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Email" name="email" autocomplete="off">
+                                </div>
+                                <div class="input-group">
+                                    <input class="form-control" type="password" placeholder="Password" name="password">
+                                </div>
+                                <div class="input-group">
+                                    <input class="form-control" type="password" placeholder="Confirm Password" name="rpassword">
+                                </div>
+                                <div class="row kt-login__extra">
+                                    <div class="col kt-align-left">
+                                        <label class="kt-checkbox">
+                                            <input type="checkbox" name="agree">I Agree the <a href="file:///C:/Users/%C3%B6zay/Desktop/classic/#" class="kt-link kt-login__link kt-font-bold">terms and conditions</a>.
+                                            <span></span>
+                                        </label>
+                                        <span class="form-text text-muted"></span>
+                                    </div>
+                                </div>
+                                <div class="kt-login__actions">
+                                    <button id="kt_login_signup_submit" class="btn btn-brand btn-elevate kt-login__btn-primary">Sign Up</button>&nbsp;&nbsp;
+                                    <button id="kt_login_signup_cancel" class="btn btn-light btn-elevate kt-login__btn-secondary">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="kt-login__forgot">
+                            <div class="kt-login__head">
+                                <h3 class="kt-login__title">Forgotten Password ?</h3>
+                                <div class="kt-login__desc">Enter your email to reset your password:</div>
+                            </div>
+                            <form class="kt-form" action="file:///C:/Users/%C3%B6zay/Desktop/classic/">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" placeholder="Email" name="email" id="kt_email" autocomplete="off">
+                                </div>
+                                <div class="kt-login__actions">
+                                    <button id="kt_login_forgot_submit" class="btn btn-brand btn-elevate kt-login__btn-primary">Request</button>&nbsp;&nbsp;
+                                    <button id="kt_login_forgot_cancel" class="btn btn-light btn-elevate kt-login__btn-secondary">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="kt-login__account">
+                            <span class="kt-login__account-msg">
+                                Don't have an account yet ?
+                            </span>
+                            &nbsp;&nbsp;
+                            <a href="javascript:;" id="kt_login_signup" class="kt-login__account-link">Sign Up!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Page -->
+    <!-- begin::Global Config(global config for global JS sciprts) -->
+    <script>
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#5d78ff",
+                    "dark": "#282a3c",
+                    "light": "#ffffff",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995"
+                },
+                "base": {
+                    "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                    "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+                }
+            }
+        };</script>
+    <!-- end::Global Config -->
+    <!--begin:: Global Mandatory Vendors -->
+    <script src="/Assets2/jquery.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/popper.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/js.cookie.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/moment.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/tooltip.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/perfect-scrollbar.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/sticky.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/wNumb.js.indir" type="text/javascript"></script>
+    <!--end:: Global Mandatory Vendors -->
+    <!--begin:: Global Optional Vendors -->
+    <script src="/Assets2/jquery.form.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery.blockUI.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-datepicker.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-datepicker.init.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-datetimepicker.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-timepicker.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-timepicker.init.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/daterangepicker.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery.bootstrap-touchspin.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-maxlength.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-multiselectsplitter.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-select.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-switch.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-switch.init.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/select2.full.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/ion.rangeSlider.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/typeahead.bundle.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/handlebars.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery.inputmask.bundle.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/inputmask.date.extensions.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/inputmask.numeric.extensions.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/nouislider.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/owl.carousel.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/autosize.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/clipboard.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/dropzone.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/summernote.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/markdown.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-markdown.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-markdown.init.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-notify.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-notify.init.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery.validate.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/additional-methods.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery-validation.init.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/toastr.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/raphael.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/morris.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/Chart.bundle.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/bootstrap-session-timeout.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/idle-timer.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery.waypoints.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery.counterup.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/promise.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/sweetalert2.min.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/sweetalert2.init.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/lib.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/jquery.input.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/repeater.js.indir" type="text/javascript"></script>
+    <script src="/Assets2/purify.js.indir" type="text/javascript"></script>
+    <!--end:: Global Optional Vendors -->
+    <!--begin::Global Theme Bundle(used by all pages) -->
+    <script src="/Assets2/scripts.bundle.js.indir" type="text/javascript"></script>
+    <!--end::Global Theme Bundle -->
+    <!--begin::Page Scripts(used by this page) -->
+    <script src="/Assets2/login-general.js.indir" type="text/javascript"></script>
+    <!--end::Page Scripts -->
+    <!-- end::Body -->
+</body>
+</html>

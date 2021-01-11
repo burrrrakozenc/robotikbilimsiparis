@@ -1,0 +1,93 @@
+﻿@using Entity2
+@{
+    ViewBag.Title = "ProfileView";
+    User currentUser = Session["currentUser"] as User;
+    List<User> users = Query.UserList();
+}
+
+<form class="form" id="form">
+    <div class="tab-content">
+        <div class="tab-pane active" id="kt_apps_user_edit_tab_1" role="tabpanel">
+            <div class="kt-form kt-form--label-right">
+                <div class="kt-form__body">
+                    <div class="kt-section kt-section--first">
+                        <div class="form">
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <input class="form-control" type="text" id="FirstName" value="@currentUser.FirstName">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <input class="form-control" type="text" id="LastName" value="@currentUser.LastName">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Contact Phone</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
+                                        <input type="text" class="form-control" value="" placeholder="Phone" aria-describedby="basic-addon1">
+                                    </div>
+                                    <span class="form-text text-muted">We'll never share your email with anyone else.</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
+                                        <input type="text" class="form-control" id="Email" value="@currentUser.Email" placeholder="Email" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-last row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Company Site</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Username" value="loop">
+                                        <div class="input-group-append"><span class="input-group-text">.com</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <a class="btn btn-success" onclick="UserUpdate()">Save</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script>
+    function UserUpdate() {
+        var FirstName = $("#FirstName").val();
+        var LastName = $("#LastName").val();
+        var Email = $("#Email").val();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/User/UserUpdate',
+            data: JSON.stringify({ FirstName: FirstName, LastName: LastName, Email: Email}), //ProductID: ProductID,
+            contentType: 'application/json',
+            success: function (data) {
+                $(document).ajaxStop(function () {
+                    setInterval(function () {
+                        location.reload();
+                    }, 100);
+                });
+            }
+        })
+    }
+</script>

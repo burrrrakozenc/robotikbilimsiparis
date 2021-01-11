@@ -1,0 +1,50 @@
+﻿@using Entity2;
+@model Category
+
+@{
+    ViewBag.Title = "Index";
+    User currentUser = Session["currentUser"] as User;
+    List<Product> products = Query.ProductList();
+    List<Category> categories = Query.CategoryList();
+
+}
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-4">
+        <span>Category Name</span>@Html.TextBoxFor(x => x.CategoryName, new { @class = "form-control" })
+        <span>Category Parent</span>@Html.DropDownList("Categories", new SelectList(ViewBag.Categories, "Value", "Text"), "Choose a Category", new { @id = "Categories", @class = "form-control" })
+        <a class="btn btn-success" onclick="minefunction()">Add Product</a>
+    </div>
+</div>
+
+<a href="/Category/CategoryList">List</a>
+
+<script>
+
+    function minefunction() {
+        var CategoryName = $("#CategoryName").val();
+        var Categories = $("#Categories").val();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Category/CategoryAdd',
+            data: JSON.stringify({ CategoryName: CategoryName, Categories: Categories }),
+            contentType: 'application/json',
+            success: function (data) {
+                alert("successfully inserted");
+            },
+
+            failure: function () {
+                alert("not successfull");
+            }
+        })
+    }
+</script>
+
+
+<li>
+    <ul>
+    </ul>
+</li>
+
+

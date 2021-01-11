@@ -1,0 +1,71 @@
+﻿@using Entity2;
+@model Product
+
+@{
+    ViewBag.Title = "Index";
+    //List<User> users = Query.UserList();
+    User currentUser = Session["currentUser"] as User;
+
+}
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-4">
+        <span>Product Name</span>@Html.TextBoxFor(x => x.ProductName, new { @class = "form-control" })
+        <span>Product Price</span>@Html.TextBoxFor(x => x.ProductPrice, new { @class = "form-control" })
+        <span>Product Stock</span>@Html.TextBoxFor(x => x.ProductStock, new { @class = "form-control" })
+        <span>Product Category</span>@Html.DropDownList("Category", new SelectList(ViewBag.Category,"Value","Text"),"Choose a Cateorgy", new {@id = "Category", @class = "form-control"})
+        <a class="btn btn-success" onclick="meinfunction()">Add Product</a>
+    </div>
+</div>
+
+<div class="row">
+    <span>Product Name</span>@Html.DropDownList("Product2", new SelectList(ViewBag.Products, "Value", "Text"), "Choose a Product", new { @id = "Product2", @class = "form-control" })
+    <span>Category Name</span>@Html.DropDownList("Category2", new SelectList(ViewBag.Category, "Value", "Text"), "Choose a Category", new { @id = "Category2", @class = "form-control"})
+    <a class="btn btn-success" onclick="meinefunctione()">Pick a Category for Product</a>
+</div>
+
+
+<script>
+
+    function meinfunction() {
+        var ProductName = $("#ProductName").val();
+        var ProductPrice = $("#ProductPrice").val();
+        var ProductStock = $("#ProductStock").val();
+        var Category = $("#Category").val();
+        debugger
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Product/ProductAdd',
+            data: JSON.stringify({ ProductName: ProductName, ProductPrice: ProductPrice, ProductStock: ProductStock, Category:Category }),
+            contentType: 'application/json',
+            success: function (data) {
+                alert("successfully inserted");
+            },
+
+            failure: function () {
+                alert("not successfull");
+            }
+        })
+    }
+
+    function meinefunctione() {
+        var Product2 = $("#Product2").val();
+        var Category2 = $("#Category2").val();
+        debugger
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/Product/ProductCategory',
+            data: JSON.stringify({ Product2: Product2, Category2: Category2 }),
+            contentType: 'application/json',
+            success: function (data) {
+                alert("successfully inserted");
+            },
+
+            failure: function () {
+                alert("not successfull");
+            }
+        })
+    }
+</script>

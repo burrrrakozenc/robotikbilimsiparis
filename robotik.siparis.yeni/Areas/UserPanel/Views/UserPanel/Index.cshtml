@@ -1,0 +1,50 @@
+﻿@using Entity2;
+@model User
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    User currentUser = Session["currentUser"] as User;
+    List<User> users = Query.UserList();
+}
+
+<h2>Add User</h2>
+
+<div class="row">
+    <div class="col-md-8 col-lg-offset-4">
+        <span>First Name</span>@Html.TextBoxFor(x => x.FirstName, new { @type = "text", @class = "form-control" })
+        <span>Last Name</span>@Html.TextBoxFor(x => x.LastName, new { @type = "text", @class = "form-control" })
+        <span>Email</span>@Html.TextBoxFor(x => x.Email, new { @type = "email", @class = "form-control" })
+        <span>Password</span>@Html.TextBoxFor(x => x.Password, new { @type = "password", @class = "form-control" })
+        <span>Address</span>@Html.TextBoxFor(x => x.Address, new { @type = "text", @class = "form-control" })
+        <a class="btn btn-success" onclick="mafunction()">Add User</a>
+    </div>
+</div>
+
+<script>
+
+
+    function mafunction() {
+        debugger
+        var FirstName = $("#FirstName").val();
+        var LastName = $("#LastName").val();
+        var Email = $("#Email").val();
+        var Atelier = $("#Atelier").val();
+        var Password = $("#Password").val();
+        var Address = $("#Address").val();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: '/User/UserAdd',
+            data: JSON.stringify({ FirstName: FirstName, LastName: LastName, Email: Email, Atelier: Atelier,Password:Password,Address:Address}),
+            contentType: 'application/json',
+            success: function (data) {
+                alert("successfully inserted");
+            },
+
+            failure: function () {
+                alert("not successfull");
+            }
+        })
+    }
+</script>

@@ -1,0 +1,113 @@
+﻿@using Entity2
+@{
+    ViewBag.Title = "Index";
+    User currentUser = Session["currentUser"] as User;
+    List<BasketProduct> basketProducts = Query.BasketProductList().Where(a => a.OrderID != null).Where(x => x.BasketID == currentUser.BasketID).ToList();
+    List<Product> products = Query.ProductList();
+    List<Order> orders = Query.OrderList();
+    var counter = 0;
+}
+
+
+<div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded" id="kt_apps_user_list_datatable" style="">
+    <table class="kt-datatable__table" style="display: block; min-height: 500px;">
+        <thead class="kt-datatable__head">
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <th data-field="OrderNo" class="kt-datatable__cell kt-datatable__cell--sort kt-datatable__cell--sorted" data-sort="desc"><span style="width: 150px;">Product Name</span></th>
+                <th data-field="OrderStatus" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 120px;">Siparis Durumu</span></th>
+                <th data-field="Date" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 90px;">Siparis Tarihi</span></th>
+                <th data-field="Date" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 90px;">Tahmini Varis Tarihi</span></th>
+                <th data-field="Total" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 60px;">Toplam</span></th>
+                <th data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell kt-datatable__cell--sort"><span style="width: 80px;">Detay</span></th>
+            </tr>
+        </thead>
+        @foreach (var i in orders)
+        {
+
+            <tbody class="kt-datatable__body" style="">
+
+                <tr data-row="@i.ID" class="kt-datatable__row" style="left: 0px;">
+                    <td class="kt-datatable__cell--sorted kt-datatable__cell" data-field="ProductName">
+                        <span style="width: 200px;">
+                            Siparis No: @i.ID
+                        </span>
+                    </td>
+                    <td data-field="OrderStatus" class="kt-datatable__cell btn btn-bold btn-label-dark"><span style="width: 150px;@(i.UserSubmit ? "color:green" : "color:red")">@i.UserSubmit</span></td>
+                    <td data-field="Total" class="kt-datatable__cell"><span style="width: 140px;">@i.CreatedOn</span></td>
+                    <td data-field="Date" class="kt-datatable__cell"><span style="width: 130px;">@i.ExpectedDeliveryDate</span></td>
+                    <td data-field="Date" class="kt-datatable__cell"><span style="width: 80px;">@i.TotalPrice</span></td>
+                    <td data-field="Actions" data-autohide-disabled="false" class="kt-datatable__cell">
+
+
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info btn-font-md" data-toggle="modal" data-target="#myModal@(i.ID)">Order Details</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal@(i.ID)" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"></button>
+                                        <h4 class="modal-title">Order Details</h4>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <table>
+                                            <thead>
+                                                <tr class="row col-md-12">
+                                                    <th class="col-md-4">
+                                                        Product Name
+                                                    </th>
+                                                    <th class="col-md-4">
+                                                        Product Quantity
+                                                    </th>
+                                                    <th class="col-md-4">
+                                                        SubTotal
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var a in basketProducts.Where(x => x.OrderID == i.ID).ToList())
+                                                {
+                                                    <tr class="row col-md-12">
+                                                        <td class="col-md-4">@products.Where(x => x.ID == a.ProductID).FirstOrDefault().ProductName</td>
+                                                        <td class="col-md-4">@a.Quantity</td>
+                                                        <td class="col-md-4">@a.SubTotal</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                <tr class="row col-md-12">
+                                                    <td class="col-md-4"><b></b></td>
+                                                    <td class="col-md-4"><b></b></td>
+                                                    <td class="col-md-4"><b>@basketProducts.Where(x => x.OrderID == i.ID).Sum(s => s.SubTotal)</b></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            counter++;
+        }
+        <tfoot class="kt-datatable__foot">
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <td data-field="ProductName" class="kt-datatable__cell kt-datatable__cell"><span style="width: 180px;"></span></td>
+                <td data-field="Quantity" class="kt-datatable__cell kt-datatable__cell"><span style="width: 100px;"></span></td>
+                <td data-field="SubTotal" class="kt-datatable__cell kt-datatable__cell"><span style="width: 120px;">Total Price : @basketProducts.Where(x => x.BasketID == currentUser.BasketID).Sum(s => s.SubTotal)</span></td>
+                <td data-field="Actions" class="kt-datatable__cell kt-datatable__cell">
+                </td>
+            </tr>
+        </tfoot>
+
+
+    </table>
+</div>

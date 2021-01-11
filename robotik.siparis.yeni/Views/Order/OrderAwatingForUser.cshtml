@@ -1,0 +1,148 @@
+﻿@using Entity2
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "OrderAwaitingForUser";
+    User currentUser = Session["currentUser"] as User;
+    List<Order> orders = Query.OrderList();
+    List<BasketProduct> basketProducts = Query.BasketProductList();
+    List<Product> products = Query.ProductList();
+    List<Atelier> ateliers = Query.AtelierList();
+    List<User> users = Query.UserList();
+    List<Basket> baskets = Query.BasketList();
+    Atelier atelier = Query.AtelierList().Where(t => t.ID == currentUser.AtelierID).FirstOrDefault();
+    ViewBag.Message1 = "Siparisiniz hazirlaniyor";
+    ViewBag.Message2 = "Kullanici onayi bekliyor";
+    ViewBag.Message3 = "Odeneme alindi";
+    ViewBag.Message4 = "Lutfen odeme yapiniz";
+    //List<Order> ordersUnpaid = Query.OrderList().Where(e => e.BasketID == currentUser.BasketID).Where(b => b.PaymentStatus == false).ToList();
+    //int unpaid = ordersUnpaid.Count();
+    //if (unpaid > 1)
+    //{
+
+    //    ViewBag.Para = "Odemenmemis siparisleriniz var.";
+    //}
+}
+
+
+
+<h2>OrderAwaitingForUser</h2>
+
+<div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded">
+    <table class="kt-datatable__table" style="display: block; min-height: 500px;">
+        <thead class="kt-datatable__head">
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <th class="kt-datatable__cell"><span style="width: 70px;">Atolye</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Siparis Durumu</span></th>
+                <th class="kt-datatable__cell"><span style="width: 60px;">Siparis Tarihi</span></th>
+                <th class="kt-datatable__cell"><span style="width: 80px;">Tahmini Teslim Tarihi</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Kargo Takip No</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Odeme Durumu</span></th>
+                <th class="kt-datatable__cell"><span style="width: 50px;">Tutar</span></th>
+                <th class="kt-datatable__cell"><span style="width: 10px;"></span></th>
+            </tr>
+        </thead>
+        <tbody class="kt-datatable__body" style="">
+            @foreach (var o in orders.Where(a => a.OrderStatus == false).Where(f => f.BasketID == currentUser.BasketID).ToList())
+            {
+                <tr class="kt-datatable__row" style="left: 0px;">
+                    <td class="kt-datatable__cell"><span style="width: 90px;">@ateliers.Where(w => w.ID == currentUser.AtelierID).FirstOrDefault().Name</span></td>
+                    <td class="kt-datatable__cell btn btn-bold btn-label-dark "><span style=" width: 120px; @(o.UserSubmit? "color:green" : "color:red")">@(o.UserSubmit? ViewBag.Message1 : ViewBag.Message2)</span></td>
+                    <td class="kt-datatable__cell"><span style="width: 90px;">@o.CreatedOn</span></td>
+                    <td class="kt-datatable__cell"><span style="width: 90px;">@o.ExpectedDeliveryDate</span></td>
+                    <td class="kt-datatable__cell"><span style="width: 110px;">@o.ShipmentNo</span></td>
+                    <td class="kt-datatable__cell btn btn-bold btn-label-dark"><span style="width: 100px; @(o.PaymentStatus ? "color:green" : "color:red")">@(o.PaymentStatus? ViewBag.Message3 : ViewBag.Message4 )</span></td>
+                    <td class="kt-datatable__cell"><span style="width: 50px;">@o.TotalPrice</span></td>
+                    <td class="kt-datatable__cell">
+
+                        <div style="overflow: visible; position: relative; width: 10px;">
+                            <div class="dropdown">
+                                <a data-toggle="dropdown" class="btn btn-sm btn-clean btn-icon btn-icon-md">									<i class="flaticon-more-1"></i>								</a>
+                                <div class="dropdown-menu dropdown-menu-right" style="width:240px;">
+                                    <ul class="kt-nav">
+                                        <li class="kt-nav__item"><button type="button" class="rounded btn" onclick="getProduct(@o.ID)"><i class="kt-nav__link-icon flaticon2-list-3"></i><span class="kt-nav__link-text">Siparis Detay</span></button></li>
+                                        @if (o.ShipmentStatus == true)
+                                        {
+                                            <form class="orderDeliveryArrived">
+                                                <input type="hidden" name="OrderID" id="OrderID" value="@o.ID" />
+                                                <li class="kt-nav__item"><button type="submit" class="rounded btn"><i class="kt-nav__link-icon flaticon2-trash"></i><span class="kt-nav__link-text">Siparisi Teslim Aldim</span></button></li>
+                                            </form>
+                                        }
+                                        @if (o.UserSubmit == false)
+                                        {
+                                            <form class="orderUserSubmit">
+                                                <input type="hidden" name="OrderID" id="OrderID" value="@o.ID" />
+                                                <li class="kt-nav__item"><button type="submit" class="rounded btn"><i class="kt-nav__link-icon flaticon2-trash"></i><span class="kt-nav__link-text">Onayla</span></button></li>
+                                            </form>
+                                        }
+                                        @if (o.UserSubmit == false)
+                                        {
+                                            <form class="orderDeleteForm">
+                                                <input type="hidden" name="OrderID" id="OrderID" value="@o.ID" />
+                                                <li class="kt-nav__item"><button type="submit" class="rounded btn"><i class="kt-nav__link-icon flaticon2-trash"></i><span class="kt-nav__link-text">Siparisi Sil</span></button></li>
+                                            </form>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td> </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+@*@if (ViewBag.Para != null)
+    {
+        <script>
+            $(function () {
+                $("#successModal").modal('show');
+            });
+        </script>
+    }*@
+
+<script src="~/assets/vendors/general/jquery/dist/jquery.js" type="text/javascript"></script>
+@if (ViewBag.Para != null)
+{
+    <script>
+        $(document).ready(function () {
+           alert('@ViewBag.Para');
+        });
+    </script>
+}
+
+
+<div class="modal fade" id="getProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">Name</th>
+                            <th style="width: 100px;">Adet</th>
+                            <th style="width: 100px;">Tutar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,231 @@
+﻿@using Entity2;
+@model List<Product>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "ProductList";
+    List<User> users = Query.UserList();
+    IEnumerable<Product> products = Query.ProductList();
+    User currentUser = Session["currentUser"] as User;
+    List<Category> categories = Query.CategoryList();
+    //Html.AntiForgeryToken();
+}
+<div class="container">
+    <div class="form-group">
+        <div class="input-group btn rounded" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+            <span class="input-group-addon"><i class="flaticon-search"></i></span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" style="background-color:flavor" />
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    @foreach (var i in products)
+    {
+        <div class="Searchdiv col-md-3">
+            <div class="container-fluid">
+                <!--Begin::Portlet-->
+                <div class="kt-portlet kt-portlet--height-fluid">
+                    <div class="kt-portlet__head kt-portlet__head--noborder">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="kt-portlet__body">
+                        <!--begin::Widget -->
+                        <div class="kt-widget kt-widget--user-profile-2">
+                            <div class="kt-widget__head">
+                                <div class="kt-widget__media">
+                                    <img class="kt-widget__img kt-hidden-" src="/Assets/media/logo.PNG" alt="image">
+                                    <div class="kt-widget__pic kt-widget__pic--success kt-font-success kt-font-boldest kt-hidden">
+                                    </div>
+                                </div>
+                                <div class="kt-widget__info">
+                                    <a href="#" class="kt-widget__username">
+                                        @i.ProductName
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="kt-widget__body">
+                                <div class="kt-widget__section">
+                                    Lorem ipsum dolor sit amet <a href="#" class="kt-font-brand kt-link kt-font-transform-u kt-font-bold"> #xrs-23pq</a>, sed
+                                    <b>USD342/Annual</b> doloremagna
+                                </div>
+                                <div class="kt-widget__item">
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__label">Category:</span>
+                                        <a href="#" class="kt-widget__data">e</a> @*categories.Where(x => x.ID == i.CategoryID).FirstOrDefault().CategoryName*@
+                                    </div>
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__label">Unit Price:</span>
+                                        <a class="kt-widget__data">@i.ProductPrice</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="kt-widget__footer" id="form-id">
+                                <form class="basketForm" id="form-id">
+                                    <div class="row col-md-12" style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                        <div class="col-md-3">
+                                            <label><b>Adet</b></label>
+                                        </div>
+                                        <div class="quantity col-md-6">
+                                            <input type="number" min="1" max="99" step="1" name="qntty" id="qntty">
+                                        </div>
+                                        <div>
+                                            <input type="hidden" name="id" id="id" value="@i.ID" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-label-success btn-lg btn-upper">Sepete Ekle</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--end::Widget -->
+                    </div>
+                    <!--End::Portlet-->
+                </div>
+            </div>
+        </div>
+
+        <!-- End row -->
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searhText = $("#Search").val().toLowerCase();
+            $(".Searchdiv").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            })
+        })
+    })
+</script>
+
+<style>
+    .quantity {
+        position: relative;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .quantity input {
+        width: 45px;
+        height: 42px;
+        line-height: 1.65;
+        float: left;
+        display: block;
+        padding: 0;
+        margin: 0;
+        padding-left: 20px;
+        border: 1px solid #eee;
+    }
+
+        .quantity input:focus {
+            outline: 0;
+        }
+
+    .quantity-nav {
+        float: left;
+        position: relative;
+        height: 42px;
+    }
+
+    .quantity-button {
+        position: relative;
+        cursor: pointer;
+        border-left: 1px solid #eee;
+        width: 20px;
+        text-align: center;
+        color: #333;
+        font-size: 13px;
+        font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+        line-height: 1.7;
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
+
+        .quantity-button.quantity-up {
+            position: absolute;
+            height: 50%;
+            top: 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .quantity-button.quantity-down {
+            position: absolute;
+            bottom: -1px;
+            height: 50%;
+        }
+</style>
+
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*@
+<!-- Remember to include jQuery :) -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>-->
+<!-- jQuery Modal -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />-->
+@*<div class="row">
+    @if (products.Count() == 0)
+    {
+        <h2>No mathc!</h2>
+        products.Count();
+    }
+    else
+    {
+
+        foreach (var i in Model)
+        {*@
+
+
+@*@using (Html.BeginForm("ProductList", "Product", FormMethod.Get))
+    {
+
+        <div class="kt-searchbar">
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect id="bound" x="0" y="0" width="24" height="24"></rect>
+                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" id="Path-2" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" id="Path" fill="#000000" fill-rule="nonzero"></path>
+                            </g>
+                        </svg>
+                    </span>
+                </div>
+                <input type="text" name="searching"  class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+            </div>
+        </div>
+
+
+    }*@

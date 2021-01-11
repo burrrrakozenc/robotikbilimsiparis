@@ -1,0 +1,182 @@
+﻿@using Entity2;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    User currentUser = Session["currentUser"] as User;
+    List<Order> orders = Query.OrderList();
+    List<User> users = Query.UserList();
+    List<Atelier> ateliers = Query.AtelierList();
+    List<BasketProduct> basketProducts = Query.BasketProductList();
+    List<Product> products = Query.ProductList();
+}
+
+<script src="~/Assets/js/CustomScript.js"></script>
+
+
+<h3>he</h3>
+
+<div class="kt-datatable kt-datatable--default kt-datatable--brand kt-datatable--loaded">
+    <table class="kt-datatable__table" style="display: block; min-height: 500px;">
+        <thead class="kt-datatable__head">
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <th class="kt-datatable__cell"><span style="width: 60px;">Atolye</span></th>
+                <th class="kt-datatable__cell"><span style="width: 60px;">Siparis Tarihi</span></th>
+                <th class="kt-datatable__cell"><span style="width: 50px;">Tutar</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Alici Onay</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Muhasebe Onay</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Stok Onay</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Sevkiyat Onay</span></th>
+                <th class="kt-datatable__cell"><span style="width: 60px;">Tahmini Teslim Tarihi</span></th>
+                <th class="kt-datatable__cell"><span style="width: 70px;">Kargo Takip No</span></th>
+                <th class="kt-datatable__cell"><span style="width: 10px;"></span></th>
+            </tr>
+        </thead>
+        <tbody class="kt-datatable__body" style="">
+            @foreach (var o in orders)
+            {
+            <tr class="kt-datatable__row" style="left: 0px;">
+                <td class="kt-datatable__cell"><span style="width: 90px;">@ateliers.Where(y=>y.ID == currentUser.AtelierID).FirstOrDefault().Name</span></td>
+                <td class="kt-datatable__cell"><span style="width: 90px;">@o.CreatedOn</span></td>
+                <td class="kt-datatable__cell"><span style="width: 50px;">@o.TotalPrice</span></td>
+                <td class="kt-datatable__cell btn btn-bold btn-label-dark"><span style="width: 120px; @(o.UserSubmit ? "color:green" : "color:red")">@o.UserSubmit</span></td>
+                <td class="kt-datatable__cell btn btn-bold btn-label-dark "><span style=" width: 120px; @(o.AccountingStatus ? "color:green" : "color:red")">@o.AccountingStatus</span></td>
+                <td class="kt-datatable__cell btn btn-bold btn-label-dark"><span style="width: 100px; @(o.StoreStatus ? "color:green" : "color:red")">@o.StoreStatus</span></td>
+                <td class="kt-datatable__cell btn btn-bold btn-label-dark"><span style="width: 100px; @(o.ShipmentStatus ? "color:green" : "color:red")">@o.ShipmentStatus</span></td>
+                <td class="kt-datatable__cell"><span style="width: 100px;">@o.ExpectedDeliveryDate</span></td>
+                <td class="kt-datatable__cell"><span style="width: 110px;">@o.ShipmentNo</span></td>
+                <td class="kt-datatable__cell">
+
+                    <div style="overflow: visible; position: relative; width: 10px;">
+                        <div class="dropdown">
+                            <a data-toggle="dropdown" class="btn btn-sm btn-clean btn-icon btn-icon-md">									<i class="flaticon-more-1"></i>								</a>
+                            <div class="dropdown-menu dropdown-menu-right" style="width:240px;">
+                                <ul class="kt-nav">
+                                    <li class="kt-nav__item"><button type="button" class="rounded btn" onclick="getProduct(@o.ID)"><i class="kt-nav__link-icon flaticon2-list-3"></i><span class="kt-nav__link-text">View</span></button></li>
+                                    <form class="orderDeleteForm">
+                                        <input type="hidden" name="OrderID" id="OrderID" value="@o.ID" />
+                                        <li class="kt-nav__item"><button type="submit" class="rounded btn"><i class="kt-nav__link-icon flaticon2-trash"></i><span class="kt-nav__link-text">Delete</span></button></li>
+                                    </form>
+                                    <li class="kt-nav__item"><button type="submit" style="text-align:left" data-toggle="modal" data-target="#kt_datepicker_modal@(o.ID)" class="rounded btn"><i class="kt-nav__link-icon flaticon-event-calendar-symbol"></i><span class="kt-nav__link-text">Tahmini Teslimat Tarihi</span></button></li>
+                                    <li class="kt-nav__item"><button type="submit" data-toggle="modal" data-target="#shipment_modal@(o.ID)" class="rounded btn"><i class="kt-nav__link-icon flaticon-event-calendar-symbol"></i><span class="kt-nav__link-text">Kargo Numarasi</span></button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td> </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+<div class="modal fade" id="getProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;">Name</th>
+                            <th style="width: 100px;">Adet</th>
+                            <th style="width: 100px;">Tutar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var o in orders)
+{
+    <div class="modal fade" id="kt_datepicker_modal@(o.ID)" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Bootstrap Date Picker Examples</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="la la-remove"></span>
+                    </button>
+                </div>
+                <form class="orderDateForm">
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-md-12">
+                                    <!-- Form code begins -->
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <label class="control-label">Date</label>
+                                        <input type="hidden" name="OrderID" id="OrderID" value="@o.ID" />
+                                        <span><input class="form-control col-lg-10" id="date" name="date" placeholder="MM/DD/YYY" type="date" /></span>
+                                    </div>
+                                    <!-- Form code ends -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-brand" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+
+@foreach (var o in orders)
+{
+    <div class="modal fade" id="shipment_modal@(o.ID)" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kargo Takip No</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="la la-remove"></span>
+                    </button>
+                </div>
+                <form class="shipmentForm">
+                    <div class="bootstrap-iso">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-md-12">
+                                    <!-- Form code begins -->
+                                    <div class="form-group">
+                                        <!-- Date input -->
+                                        <label class="control-label">Kargo</label>
+                                        <input type="hidden" name="OrderID" id="OrderID" value="@o.ID" />
+                                        <span><input class="form-control col-lg-10" id="ShipmentNo" name="ShipmentNo" placeholder="Kargo Takip No" type="text" /></span>
+                                    </div>
+                                    <!-- Form code ends -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-brand" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}

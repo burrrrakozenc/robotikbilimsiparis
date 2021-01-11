@@ -1,0 +1,470 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BCB398AB-C65B-4536-8596-94B998002939}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Entity2</RootNamespace>
+    <AssemblyName>Entity2</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Address.cs" />
+    <Compile Include="Atelier.cs" />
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Basket.cs" />
+    <Compile Include="BasketProduct.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="DatabaseContext.cs" />
+    <Compile Include="Migrations\202011241136565_InitialCreate.cs" />
+    <Compile Include="Migrations\202011241136565_InitialCreate.designer.cs">
+      <DependentUpon>202011241136565_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241139117_mig01.cs" />
+    <Compile Include="Migrations\202011241139117_mig01.designer.cs">
+      <DependentUpon>202011241139117_mig01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241145135_mig02.cs" />
+    <Compile Include="Migrations\202011241145135_mig02.designer.cs">
+      <DependentUpon>202011241145135_mig02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241159451_mig03.cs" />
+    <Compile Include="Migrations\202011241159451_mig03.designer.cs">
+      <DependentUpon>202011241159451_mig03.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241200351_mig04.cs" />
+    <Compile Include="Migrations\202011241200351_mig04.designer.cs">
+      <DependentUpon>202011241200351_mig04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241448268_mig07.cs" />
+    <Compile Include="Migrations\202011241448268_mig07.designer.cs">
+      <DependentUpon>202011241448268_mig07.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241453052_mig08.cs" />
+    <Compile Include="Migrations\202011241453052_mig08.designer.cs">
+      <DependentUpon>202011241453052_mig08.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241456254_mig09.cs" />
+    <Compile Include="Migrations\202011241456254_mig09.designer.cs">
+      <DependentUpon>202011241456254_mig09.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011241502368_mig10.cs" />
+    <Compile Include="Migrations\202011241502368_mig10.designer.cs">
+      <DependentUpon>202011241502368_mig10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011251143582_mig11.cs" />
+    <Compile Include="Migrations\202011251143582_mig11.designer.cs">
+      <DependentUpon>202011251143582_mig11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011252314487_mig12.cs" />
+    <Compile Include="Migrations\202011252314487_mig12.designer.cs">
+      <DependentUpon>202011252314487_mig12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011261150128_mig13.cs" />
+    <Compile Include="Migrations\202011261150128_mig13.designer.cs">
+      <DependentUpon>202011261150128_mig13.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011271054446_mig14.cs" />
+    <Compile Include="Migrations\202011271054446_mig14.designer.cs">
+      <DependentUpon>202011271054446_mig14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011291208265_mig15.cs" />
+    <Compile Include="Migrations\202011291208265_mig15.designer.cs">
+      <DependentUpon>202011291208265_mig15.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011301945111_mig16.cs" />
+    <Compile Include="Migrations\202011301945111_mig16.designer.cs">
+      <DependentUpon>202011301945111_mig16.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302011165_mig17.cs" />
+    <Compile Include="Migrations\202011302011165_mig17.designer.cs">
+      <DependentUpon>202011302011165_mig17.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302034572_mig18.cs" />
+    <Compile Include="Migrations\202011302034572_mig18.designer.cs">
+      <DependentUpon>202011302034572_mig18.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302035520_mig19.cs" />
+    <Compile Include="Migrations\202011302035520_mig19.designer.cs">
+      <DependentUpon>202011302035520_mig19.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302037300_mig20.cs" />
+    <Compile Include="Migrations\202011302037300_mig20.designer.cs">
+      <DependentUpon>202011302037300_mig20.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302048255_mig21.cs" />
+    <Compile Include="Migrations\202011302048255_mig21.designer.cs">
+      <DependentUpon>202011302048255_mig21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302049329_mig22.cs" />
+    <Compile Include="Migrations\202011302049329_mig22.designer.cs">
+      <DependentUpon>202011302049329_mig22.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302053117_mig23.cs" />
+    <Compile Include="Migrations\202011302053117_mig23.designer.cs">
+      <DependentUpon>202011302053117_mig23.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302056241_mig24.cs" />
+    <Compile Include="Migrations\202011302056241_mig24.designer.cs">
+      <DependentUpon>202011302056241_mig24.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302104336_mig25.cs" />
+    <Compile Include="Migrations\202011302104336_mig25.designer.cs">
+      <DependentUpon>202011302104336_mig25.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302113584_mig26.cs" />
+    <Compile Include="Migrations\202011302113584_mig26.designer.cs">
+      <DependentUpon>202011302113584_mig26.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302122578_mig28.cs" />
+    <Compile Include="Migrations\202011302122578_mig28.designer.cs">
+      <DependentUpon>202011302122578_mig28.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302128099_mig29.cs" />
+    <Compile Include="Migrations\202011302128099_mig29.designer.cs">
+      <DependentUpon>202011302128099_mig29.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011302152442_mig30.cs" />
+    <Compile Include="Migrations\202011302152442_mig30.designer.cs">
+      <DependentUpon>202011302152442_mig30.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012010838022_mig31.cs" />
+    <Compile Include="Migrations\202012010838022_mig31.designer.cs">
+      <DependentUpon>202012010838022_mig31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012011326407_mig33.cs" />
+    <Compile Include="Migrations\202012011326407_mig33.designer.cs">
+      <DependentUpon>202012011326407_mig33.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012021026242_mig34.cs" />
+    <Compile Include="Migrations\202012021026242_mig34.designer.cs">
+      <DependentUpon>202012021026242_mig34.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012021158158_mig35.cs" />
+    <Compile Include="Migrations\202012021158158_mig35.designer.cs">
+      <DependentUpon>202012021158158_mig35.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012021233273_mig36.cs" />
+    <Compile Include="Migrations\202012021233273_mig36.designer.cs">
+      <DependentUpon>202012021233273_mig36.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012032250293_mig37.cs" />
+    <Compile Include="Migrations\202012032250293_mig37.designer.cs">
+      <DependentUpon>202012032250293_mig37.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012040248075_mig38.cs" />
+    <Compile Include="Migrations\202012040248075_mig38.designer.cs">
+      <DependentUpon>202012040248075_mig38.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012041219243_mig40.cs" />
+    <Compile Include="Migrations\202012041219243_mig40.designer.cs">
+      <DependentUpon>202012041219243_mig40.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012081253371_mig41.cs" />
+    <Compile Include="Migrations\202012081253371_mig41.designer.cs">
+      <DependentUpon>202012081253371_mig41.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151019120_15122020.cs" />
+    <Compile Include="Migrations\202012151019120_15122020.designer.cs">
+      <DependentUpon>202012151019120_15122020.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151029055_151220201328.cs" />
+    <Compile Include="Migrations\202012151029055_151220201328.designer.cs">
+      <DependentUpon>202012151029055_151220201328.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151100435_151220201400.cs" />
+    <Compile Include="Migrations\202012151100435_151220201400.designer.cs">
+      <DependentUpon>202012151100435_151220201400.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151238400_151220201538.cs" />
+    <Compile Include="Migrations\202012151238400_151220201538.designer.cs">
+      <DependentUpon>202012151238400_151220201538.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012151332392_migrole.cs" />
+    <Compile Include="Migrations\202012151332392_migrole.designer.cs">
+      <DependentUpon>202012151332392_migrole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012170422048_mig171220200720.cs" />
+    <Compile Include="Migrations\202012170422048_mig171220200720.designer.cs">
+      <DependentUpon>202012170422048_mig171220200720.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012170439533_mig171220200739.cs" />
+    <Compile Include="Migrations\202012170439533_mig171220200739.designer.cs">
+      <DependentUpon>202012170439533_mig171220200739.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012170537106_mig171220200836.cs" />
+    <Compile Include="Migrations\202012170537106_mig171220200836.designer.cs">
+      <DependentUpon>202012170537106_mig171220200836.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012172124387_mig181220200024.cs" />
+    <Compile Include="Migrations\202012172124387_mig181220200024.designer.cs">
+      <DependentUpon>202012172124387_mig181220200024.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012180103524_mig181220200403.cs" />
+    <Compile Include="Migrations\202012180103524_mig181220200403.designer.cs">
+      <DependentUpon>202012180103524_mig181220200403.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012180419090_mig181220200718.cs" />
+    <Compile Include="Migrations\202012180419090_mig181220200718.designer.cs">
+      <DependentUpon>202012180419090_mig181220200718.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012181133572_mig181220201433.cs" />
+    <Compile Include="Migrations\202012181133572_mig181220201433.designer.cs">
+      <DependentUpon>202012181133572_mig181220201433.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012181215487_mig181220201435.cs" />
+    <Compile Include="Migrations\202012181215487_mig181220201435.designer.cs">
+      <DependentUpon>202012181215487_mig181220201435.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012181219262_mig181220201436.cs" />
+    <Compile Include="Migrations\202012181219262_mig181220201436.designer.cs">
+      <DependentUpon>202012181219262_mig181220201436.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012181314540_mig181220201437.cs" />
+    <Compile Include="Migrations\202012181314540_mig181220201437.designer.cs">
+      <DependentUpon>202012181314540_mig181220201437.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012181331425_mig181220201438.cs" />
+    <Compile Include="Migrations\202012181331425_mig181220201438.designer.cs">
+      <DependentUpon>202012181331425_mig181220201438.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012181413478_mig181220201413.cs" />
+    <Compile Include="Migrations\202012181413478_mig181220201413.designer.cs">
+      <DependentUpon>202012181413478_mig181220201413.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012210748479_mig211220201048.cs" />
+    <Compile Include="Migrations\202012210748479_mig211220201048.designer.cs">
+      <DependentUpon>202012210748479_mig211220201048.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Order.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
+    <Compile Include="Role.cs" />
+    <Compile Include="User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011241136565_InitialCreate.resx">
+      <DependentUpon>202011241136565_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241139117_mig01.resx">
+      <DependentUpon>202011241139117_mig01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241145135_mig02.resx">
+      <DependentUpon>202011241145135_mig02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241159451_mig03.resx">
+      <DependentUpon>202011241159451_mig03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241200351_mig04.resx">
+      <DependentUpon>202011241200351_mig04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241448268_mig07.resx">
+      <DependentUpon>202011241448268_mig07.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241453052_mig08.resx">
+      <DependentUpon>202011241453052_mig08.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241456254_mig09.resx">
+      <DependentUpon>202011241456254_mig09.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011241502368_mig10.resx">
+      <DependentUpon>202011241502368_mig10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011251143582_mig11.resx">
+      <DependentUpon>202011251143582_mig11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011252314487_mig12.resx">
+      <DependentUpon>202011252314487_mig12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011261150128_mig13.resx">
+      <DependentUpon>202011261150128_mig13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011271054446_mig14.resx">
+      <DependentUpon>202011271054446_mig14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011291208265_mig15.resx">
+      <DependentUpon>202011291208265_mig15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011301945111_mig16.resx">
+      <DependentUpon>202011301945111_mig16.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302011165_mig17.resx">
+      <DependentUpon>202011302011165_mig17.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302034572_mig18.resx">
+      <DependentUpon>202011302034572_mig18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302035520_mig19.resx">
+      <DependentUpon>202011302035520_mig19.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302037300_mig20.resx">
+      <DependentUpon>202011302037300_mig20.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302048255_mig21.resx">
+      <DependentUpon>202011302048255_mig21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302049329_mig22.resx">
+      <DependentUpon>202011302049329_mig22.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302053117_mig23.resx">
+      <DependentUpon>202011302053117_mig23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302056241_mig24.resx">
+      <DependentUpon>202011302056241_mig24.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302104336_mig25.resx">
+      <DependentUpon>202011302104336_mig25.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302113584_mig26.resx">
+      <DependentUpon>202011302113584_mig26.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302122578_mig28.resx">
+      <DependentUpon>202011302122578_mig28.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302128099_mig29.resx">
+      <DependentUpon>202011302128099_mig29.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011302152442_mig30.resx">
+      <DependentUpon>202011302152442_mig30.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012010838022_mig31.resx">
+      <DependentUpon>202012010838022_mig31.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012011326407_mig33.resx">
+      <DependentUpon>202012011326407_mig33.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012021026242_mig34.resx">
+      <DependentUpon>202012021026242_mig34.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012021158158_mig35.resx">
+      <DependentUpon>202012021158158_mig35.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012021233273_mig36.resx">
+      <DependentUpon>202012021233273_mig36.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012032250293_mig37.resx">
+      <DependentUpon>202012032250293_mig37.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012040248075_mig38.resx">
+      <DependentUpon>202012040248075_mig38.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012041219243_mig40.resx">
+      <DependentUpon>202012041219243_mig40.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012081253371_mig41.resx">
+      <DependentUpon>202012081253371_mig41.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151019120_15122020.resx">
+      <DependentUpon>202012151019120_15122020.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151029055_151220201328.resx">
+      <DependentUpon>202012151029055_151220201328.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151100435_151220201400.resx">
+      <DependentUpon>202012151100435_151220201400.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151238400_151220201538.resx">
+      <DependentUpon>202012151238400_151220201538.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012151332392_migrole.resx">
+      <DependentUpon>202012151332392_migrole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012170422048_mig171220200720.resx">
+      <DependentUpon>202012170422048_mig171220200720.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012170439533_mig171220200739.resx">
+      <DependentUpon>202012170439533_mig171220200739.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012170537106_mig171220200836.resx">
+      <DependentUpon>202012170537106_mig171220200836.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012172124387_mig181220200024.resx">
+      <DependentUpon>202012172124387_mig181220200024.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012180103524_mig181220200403.resx">
+      <DependentUpon>202012180103524_mig181220200403.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012180419090_mig181220200718.resx">
+      <DependentUpon>202012180419090_mig181220200718.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012181133572_mig181220201433.resx">
+      <DependentUpon>202012181133572_mig181220201433.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012181215487_mig181220201435.resx">
+      <DependentUpon>202012181215487_mig181220201435.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012181219262_mig181220201436.resx">
+      <DependentUpon>202012181219262_mig181220201436.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012181314540_mig181220201437.resx">
+      <DependentUpon>202012181314540_mig181220201437.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012181331425_mig181220201438.resx">
+      <DependentUpon>202012181331425_mig181220201438.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012181413478_mig181220201413.resx">
+      <DependentUpon>202012181413478_mig181220201413.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012210748479_mig211220201048.resx">
+      <DependentUpon>202012210748479_mig211220201048.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\robotik.siparis.yeni\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>
